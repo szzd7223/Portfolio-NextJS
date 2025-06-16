@@ -5,6 +5,9 @@
   --color-darkHover: #2a004a;
   --color-darkTheme: #11001f;
 
+  --shadow-black: 4px 4px 0 #000;
+  --shadow-white: 4px 4px 0 #fff;
+
   --font-outfit: 'Outfit', sans-serif;
   --font-ovo: 'Ovo', serif;
 }

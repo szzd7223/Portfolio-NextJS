@@ -107,9 +107,9 @@ export const serviceData = [
 ]
 
 export const infoList = [
-    { icon: assets.code_icon, iconDark: assets.code_icon_dark, title: 'Languages', description: 'HTML, CSS, JavaScript React Js, Next Js' },
-    { icon: assets.edu_icon, iconDark: assets.edu_icon_dark, title: 'Education', description: 'B.Tech in Computer Science' },
-    { icon: assets.project_icon, iconDark: assets.project_icon_dark, title: 'Projects', description: 'Built more than 5 projects' }
+    { icon: assets.code_icon, iconDark: assets.code_icon_dark, title: 'Languages and Frameworks', description: 'Python, Java, C++, Javascript, Node.js, React.js, Express.js, Rest API, MySQL, MongoDB' },
+    { icon: assets.edu_icon, iconDark: assets.edu_icon_dark, title: 'Education', description: 'B.E. in Electronics and Telecommunication \n \n Ramaiah Institute of Technology \n \n 2025' },
+    { icon: assets.project_icon, iconDark: assets.project_icon_dark, title: 'Projects', description: '-PDF Chat App using AI \n \n -Medical insurance price prediction tool \n \n -Realtime comments system using websockets' }
 ];
 
 export const toolsData = [
