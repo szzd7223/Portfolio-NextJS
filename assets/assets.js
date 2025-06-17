@@ -78,23 +78,23 @@ export const assets = {
 
 export const workData = [
     {
-        title: 'Frontend project',
-        description: 'Web Design',
+        title: 'AI Powered PDF chat app',
+        description: 'AI Productivity Tool',
         bgImage: '/work-1.png',
     },
     {
-        title: 'Geo based app',
-        description: 'Mobile App',
+        title: 'Realtime comments system',
+        description: 'Web Sockets',
         bgImage: '/work-2.png',
     },
     {
-        title: 'Photography site',
-        description: 'Web Design',
+        title: 'Medical insurance price prediction tool',
+        description: 'Machine learning',
         bgImage: '/work-3.png',
     },
     {
-        title: 'UI/UX designing',
-        description: 'UI/UX Design',
+        title: 'React movie application',
+        description: 'Frontend',
         bgImage: '/work-4.png',
     },
 ]
@@ -102,8 +102,8 @@ export const workData = [
 export const serviceData = [
     { icon: assets.web_icon, title: 'Web design', description: 'Web development is the process of building, programming...', link: '' },
     { icon: assets.mobile_icon, title: 'Mobile app', description: 'Mobile app development involves creating software for mobile devices...', link: '' },
-    { icon: assets.ui_icon, title: 'UI/UX design', description: 'UI/UX design focuses on creating a seamless user experience...', link: '' },
-    { icon: assets.graphics_icon, title: 'Graphics design', description: 'Creative design solutions to enhance visual communication...', link: '' },
+    { icon: assets.ui_icon, title: 'Backend Development', description: 'Backend development ensures secure, efficient data handling and system functionality behind the scenes.', link: '' },
+    { icon: assets.graphics_icon, title: 'AI-Powered Applications', description: 'AI-powered applications leverage intelligent algorithms to deliver smart, adaptive user experiences.', link: '' },
 ]
 
 export const infoList = [
