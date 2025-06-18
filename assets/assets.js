@@ -35,6 +35,9 @@ import right_arrow from './right-arrow.png';
 import send_icon from './send-icon.png';
 import right_arrow_bold from './right-arrow-bold.png';
 import right_arrow_bold_dark from './right-arrow-bold-dark.png';
+import github_icon from './github_icon.png';
+import linkedin_icon from './linkedin_icon.png';
+import twitter_icon from './twitter_icon.png';
 
 export const assets = {
     user_image,
@@ -73,7 +76,10 @@ export const assets = {
     right_arrow,
     send_icon,
     right_arrow_bold,
-    right_arrow_bold_dark
+    right_arrow_bold_dark,
+    github_icon,
+    linkedin_icon,
+    twitter_icon
 };
 
 export const workData = [
@@ -81,21 +87,25 @@ export const workData = [
         title: 'AI Powered PDF chat app',
         description: 'AI Productivity Tool',
         bgImage: '/work-1.png',
+        link: 'https://github.com/szzd7223/pdf-chat-app'
     },
     {
         title: 'Realtime comments system',
         description: 'Web Sockets',
         bgImage: '/work-2.png',
+        link: 'https://github.com/szzd7223/realtime-comments-system'
     },
     {
-        title: 'Medical insurance price prediction tool',
+        title: 'Medical insurance price prediction',
         description: 'Machine learning',
         bgImage: '/work-3.png',
+        link: 'https://github.com/szzd7223/Medical-Insurance-price-prediction'
     },
     {
         title: 'React movie application',
         description: 'Frontend',
         bgImage: '/work-4.png',
+        link: 'https://github.com/szzd7223/React-movie-project-tutorial'
     },
 ]
 

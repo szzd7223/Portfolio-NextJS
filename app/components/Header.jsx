@@ -47,6 +47,53 @@ const Header = () => {
         transition={{duration: 0.6, delay: 1}}
         href="/sample-resume.pdf" download className='px-10 py-3 border rounded-full border-gray-500 flex items-center gap-2 bg-white dark:text-black'>My Resume<Image src={assets.download_icon} alt='' className='w-4'/></motion.a>
       </div>
+
+      <motion.div
+  initial={{ y: 30, opacity: 0 }}
+  whileInView={{ y: 0, opacity: 1 }}
+  transition={{ duration: 0.6, delay: 1.2 }}
+  className='flex items-center gap-10 mt-6'>
+
+  {/* GitHub */}
+  <motion.a
+    initial={{ scale: 0 }}
+    whileInView={{ scale: 1 }}
+    transition={{ duration: 0.5, delay: 0.1, type: 'spring', stiffness: 120 }}
+    href="https://github.com/szzd7223"
+    target="_blank"
+    rel="noopener noreferrer"
+    className='w-20 h-20 flex items-center justify-center rounded-full overflow-hidden hover:scale-105 transition-transform duration-200'>
+    <Image src={assets.github_icon} alt='GitHub' className='w-full h-full object-contain' />
+  </motion.a>
+
+  {/* LinkedIn */}
+  <motion.a
+    initial={{ scale: 0 }}
+    whileInView={{ scale: 1 }}
+    transition={{ duration: 0.5, delay: 0.2, type: 'spring', stiffness: 120 }}
+    href="https://www.linkedin.com/in/ssaaaaddshaikh/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className='w-20 h-20 flex items-center justify-center rounded-full overflow-hidden hover:scale-105 transition-transform duration-200'>
+    <Image src={assets.linkedin_icon} alt='LinkedIn' className='w-full h-full object-contain' />
+  </motion.a>
+
+  {/* Twitter */}
+  <motion.a
+    initial={{ scale: 0 }}
+    whileInView={{ scale: 1 }}
+    transition={{ duration: 0.5, delay: 0.3, type: 'spring', stiffness: 120 }}
+    href="https://x.com/ssaaaadd_sh"
+    target="_blank"
+    rel="noopener noreferrer"
+    className='w-20 h-20 flex items-center justify-center rounded-full overflow-hidden hover:scale-105 transition-transform duration-200'>
+    <Image src={assets.twitter_icon} alt='Twitter' className='w-full h-full object-contain' />
+  </motion.a>
+
+</motion.div>
+
+
+
     </div>
   )
 }
