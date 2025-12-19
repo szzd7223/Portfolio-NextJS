@@ -38,7 +38,7 @@ const About = ({isDarkMode}) => {
       whileInView={{opacity: 1}}
       transition={{duration: 0.6, delay: 0.8}}
         className='flex-1'>
-            <p className='mb-10 max-w-2xl font-ovo'>I’m a passionate developer with experience building full-stack web applications. I enjoy working with modern technologies like React, Next.js, Node.js, and Python to create clean, efficient, and user-friendly solutions. I’m always exploring new tools and learning to improve my skills.</p>
+            <p className='mb-10 max-w-2xl font-ovo'>I’m a software developer with experience building fullstack web applications using modern and reliable tech stack. I enjoy working with modern technologies like React, Next.js, Node.js, and Python to create clean, efficient, and user-friendly solutions. I’m always exploring new tools and learning to improve my skills.</p>
 
             <motion.ul
             initial={{opacity: 0}}
