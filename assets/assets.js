@@ -84,16 +84,16 @@ export const assets = {
 
 export const workData = [
   {
-    title: "AI Powered PDF chat app",
-    description: "AI Productivity Tool",
+    title: "AI Gym Workout Planner",
+    description: "Generates personalized workout routines using Gemini 2.5 Flash Lite, Prisma, and Neon Postgres.",
     bgImage: "/work-1.png",
-    link: "https://github.com/szzd7223/pdf-chat-app",
+    link: "https://github.com/szzd7223/gym-ai",
   },
   {
-    title: "Realtime comments system",
-    description: "Web Sockets",
+    title: "Picky.Editor - CSS Picker Chrome Extension",
+    description: "A minimal Chrome Extension to pick and view CSS elements with surgical accuracy.",
     bgImage: "/work-2.png",
-    link: "https://github.com/szzd7223/realtime-comments-system",
+    link: "https://github.com/szzd7223/dev-css-picker",
   },
   {
     title: "Medical insurance price prediction",
@@ -102,10 +102,10 @@ export const workData = [
     link: "https://github.com/szzd7223/Medical-Insurance-price-prediction",
   },
   {
-    title: "Notespot -  A minimal notes app",
-    description: "Built using nextjs and fastapi with docker implementation",
+    title: "VidMetrics: YouTube Analytics Console",
+    description: "A YouTube analytics dashboard tracking channel tempo and engagement velocity.",
     bgImage: "/work-4.png",
-    link: "https://github.com/szzd7223/notespot",
+    link: "https://github.com/szzd7223/videmetrics-analytics-tool",
   },
 ];
 
@@ -159,7 +159,7 @@ export const infoList = [
     iconDark: assets.project_icon_dark,
     title: "Projects",
     description:
-      "-PDF Chat App using AI \n \n -Medical insurance price prediction tool \n \n -Realtime comments system using websockets",
+      "-AI Gym Workout Planner \n \n -Dev CSS Picker Chrome Extension \n \n -Medical Insurance Price Prediction \n \n -VidMetrics YouTube Analytics",
   },
 ];
 
