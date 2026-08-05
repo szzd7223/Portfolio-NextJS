@@ -9,7 +9,8 @@ const Header = () => {
   const { name, title, tagline, bio, avatar, socials, resumeLink } = portfolioData.personalInfo;
 
   // Typing animation configuration
-  const normalPart = "Software dev, working with Node.js, React.js, Next.js, Python and Java.\nI build whatever I like and it's usually good.\nI can build high quality software that you'd want, ";
+  const staticPart = "Software dev, working with Node.js, React.js, Next.js, Python and Java.\nI build whatever I like and it's usually good.\n";
+  const normalPart = "I can build high quality software that you'd want, ";
   const highlightedPart = "definitely.";
   const fullTextLength = normalPart.length + highlightedPart.length;
 
@@ -27,7 +28,7 @@ const Header = () => {
           return prev + 1;
         });
       }, 70); // Natural character-by-character typing speed (70ms)
-    }, 200);
+    }, 600); // Trigger after the intro page animations load
 
     return () => {
       clearTimeout(startTimeout);
@@ -84,8 +85,9 @@ const Header = () => {
         initial={{ y: 15, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="mt-4 max-w-[580px] font-sans text-sm leading-relaxed text-muted sm:text-base whitespace-pre-line min-h-[48px]"
+        className="mt-4 max-w-[580px] font-sans text-sm leading-relaxed text-muted sm:text-base whitespace-pre-line min-h-[72px]"
       >
+        <span>{staticPart}</span>
         <span>{typedNormal}</span>
         {typedHighlight && (
           <span className="text-coral font-bold transition-colors duration-200">
