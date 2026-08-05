@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "motion/react";
 import { portfolioData } from "@/data/portfolio";
 import { Card } from "@/components/ui/card";
 import { MailIcon, LinkedInIcon, XIcon } from "@/components/icons";
@@ -31,20 +32,61 @@ const Contact = () => {
     }
   ];
 
+  const headerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  };
+
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+        duration: 0.6
+      }
+    }
+  };
+
   return (
     <section id="contact" className="scroll-mt-24 flex flex-col gap-12">
       {/* Section Header */}
-      <div className="border-b border-border pb-6">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={headerVariants}
+        className="border-b border-border pb-6"
+      >
         <span className="text-xs font-bold uppercase tracking-[0.2em] text-coral font-sans">
           Contact
         </span>
         <h2 className="mt-3 font-serif text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">
           Get in touch
         </h2>
-      </div>
+      </motion.div>
 
       {/* Grid of Contact Cards */}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 font-sans">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={containerVariants}
+        className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 font-sans"
+      >
         {contactLinks.map((link) => {
           const cardContent = (
             <Card
@@ -78,12 +120,16 @@ const Contact = () => {
           );
 
           return (
-            <div key={link.id} className="group">
+            <motion.div
+              key={link.id}
+              variants={cardVariants}
+              className="group h-full"
+            >
               {cardContent}
-            </div>
+            </motion.div>
           );
         })}
-      </div>
+      </motion.div>
     </section>
   );
 };
