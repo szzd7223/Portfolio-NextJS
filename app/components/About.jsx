@@ -1,131 +1,215 @@
-import { assets, infoList, toolsData } from "@/assets/assets";
-import Image from "next/image";
 import React from "react";
-import { motion, scale } from "motion/react";
+import { portfolioData } from "@/data/portfolio";
+import { Card } from "@/components/ui/card";
+import { GraduationCapIcon, LaptopIcon } from "@/components/icons";
 
-const About = ({ isDarkMode }) => {
+// Helper function to return a clean lightweight custom SVG logo for each technology
+const getTechIcon = (techName) => {
+  const name = techName.toLowerCase();
+  
+  // Custom styled brand icons
+  if (name.includes("react")) {
+    return (
+      <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2">
+        <g transform="translate(12, 12)">
+          <ellipse rx="8" ry="3.1" transform="rotate(0)" />
+          <ellipse rx="8" ry="3.1" transform="rotate(60)" />
+          <ellipse rx="8" ry="3.1" transform="rotate(120)" />
+          <circle cx="0" cy="0" r="1.5" fill="currentColor" />
+        </g>
+      </svg>
+    );
+  }
+  if (name.includes("next.js")) {
+    return (
+      <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M9 17V7l7 10V7" />
+      </svg>
+    );
+  }
+  if (name.includes("node.js") || name.includes("express")) {
+    return (
+      <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M12 2L4 7v10l8 5 8-5V7l-8-5z M12 2v20 M4 7l8 5 8-5" />
+      </svg>
+    );
+  }
+  if (name.includes("docker")) {
+    return (
+      <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M2 12h20M4 12V9h3v3M8 12V9h3v3M12 12V9h3v3M6 9V6h3v3M10 9V6h3v3" />
+      </svg>
+    );
+  }
+  if (name.includes("python")) {
+    return (
+      <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M12 2A4 4 0 0 0 8 6v2h4v1H6a4 4 0 0 0-4 4v3a4 4 0 0 0 4 4h2v-2a2 2 0 0 1 2-2h4a2 2 0 0 0 2-2v-4a4 4 0 0 0-4-4h-2V6a2 2 0 0 1 2-2h2a2 2 0 0 0-2-2z" />
+      </svg>
+    );
+  }
+  if (name.includes("typescript") || name.includes("javascript")) {
+    return (
+      <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M9 17h3 M16 11v6" />
+      </svg>
+    );
+  }
+  if (name.includes("postgres") || name.includes("sql") || name.includes("db") || name.includes("mongo") || name.includes("redis") || name.includes("prisma") || name.includes("mongoose")) {
+    return (
+      <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2">
+        <ellipse cx="12" cy="5" rx="8" ry="3" />
+        <path d="M4 5v6c0 1.66 4 3 8 3s8-1.34 8-3V5" />
+        <path d="M4 11v6c0 1.66 4 3 8 3s8-1.34 8-3v-6" />
+      </svg>
+    );
+  }
+  if (name.includes("git") || name.includes("ci/cd")) {
+    return (
+      <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2">
+        <circle cx="18" cy="18" r="3" />
+        <circle cx="6" cy="6" r="3" />
+        <circle cx="6" cy="18" r="3" />
+        <path d="M6 9v6M9 9h9" strokeLinecap="round" />
+      </svg>
+    );
+  }
+  if (name.includes("aws") || name.includes("gcp") || name.includes("cloud") || name.includes("google")) {
+    return (
+      <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M17.5 19A5.5 5.5 0 0 0 17 8H15.5A7.5 7.5 0 0 0 1 12.5A7.5 7.5 0 0 0 8.5 20h9" />
+      </svg>
+    );
+  }
+  if (name.includes("ros") || name.includes("tensor") || name.includes("torch") || name.includes("learn") || name.includes("ai")) {
+    return (
+      <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2">
+        <circle cx="12" cy="12" r="3" />
+        <circle cx="6" cy="6" r="2" />
+        <circle cx="18" cy="6" r="2" />
+        <circle cx="6" cy="18" r="2" />
+        <circle cx="18" cy="18" r="2" />
+        <line x1="8" y1="8" x2="10" y2="10" />
+        <line x1="16" y1="8" x2="14" y2="10" />
+        <line x1="8" y1="16" x2="10" y2="14" />
+        <line x1="16" y1="16" x2="14" y2="14" />
+      </svg>
+    );
+  }
+  
+  // Default code brackets icon
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-      id="about"
-      className="w-full px-[8%] lg:px-[12%] py-16 scroll-mt-20 font-outfit"
-    >
-      <motion.h4
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-        className="text-center mb-2 text-base font-ovo"
-      >
-        Introduction
-      </motion.h4>
+    <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2">
+      <polyline points="16 18 22 12 16 6" />
+      <polyline points="8 6 2 12 8 18" />
+    </svg>
+  );
+};
 
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
-        className="text-center text-5xl font-ovo"
-      >
-        About Me
-      </motion.h2>
+const About = () => {
+  const { skillsCategories, experiences, education } = portfolioData;
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="max-w-6xl mx-auto mt-20 grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-14 items-start"
-      >
-        {/* Image */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          className="w-full flex justify-center lg:justify-start"
-        >
-          <Image
-            src={assets.user_image}
-            alt="user"
-            className="w-60 sm:w-72 rounded-3xl"
-          />
-        </motion.div>
+  return (
+    <section id="about" className="scroll-mt-24 flex flex-col gap-12">
+      <div className="border-b border-border pb-6">
+        <span className="text-xs font-bold uppercase tracking-[0.2em] text-coral font-sans">
+          Profile & Stack
+        </span>
+        <h2 className="mt-3 font-serif text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">
+          Experience & Credentials
+        </h2>
+      </div>
 
-        {/* Content */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="flex flex-col"
-        >
-          <p className="mb-8 max-w-2xl font-ovo text-sm leading-relaxed text-center lg:text-left">
-            I’m a software developer who builds reliable full-stack web
-            applications using modern technologies. I enjoy working with React,
-            Next.js, Node.js, and Python to create clean, efficient, and
-            user-friendly solutions while continuously learning and improving.
-          </p>
+      <div className="grid gap-8 md:grid-cols-2 items-stretch">
+        {/* Experience Card */}
+        <Card className="apple-glass border border-white/[0.08] hover:border-coral hover:scale-[1.02] hover:-translate-y-0.5 transition-all duration-300 p-6 rounded-xl flex flex-col gap-6 h-full">
+          <h3 className="text-lg font-bold font-sans uppercase tracking-wider text-ink flex items-center gap-2">
+            <LaptopIcon className="h-5 w-5 text-coral" />
+            <span>Experience</span>
+          </h3>
 
-          {/* Info cards */}
-          <motion.ul
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-3xl auto-rows-fr"
-          >
-            {infoList.map(({ icon, iconDark, title, description }, index) => (
-              <motion.li
-                whileHover={{ scale: 1.04 }}
-                key={index}
-                className="h-full border border-gray-400 rounded-xl px-4 py-5 cursor-pointer hover:bg-lightHover hover:-translate-y-1 duration-300 dark:border-white dark:hover:bg-darkHover/50 flex flex-col"
-              >
-                <Image
-                  src={isDarkMode ? iconDark : icon}
-                  alt={title}
-                  className="w-6 mb-3"
-                />
-                <h3 className="mb-1 text-sm font-semibold text-gray-700 leading-snug dark:text-white">
-                  {title}
-                </h3>
-                <p className="text-xs leading-snug text-gray-600 dark:text-white/80">
-                  {description.split("\n").map((line, i) => (
-                    <span key={i}>
-                      {line}
-                      <br />
+          <div className="flex flex-col gap-6 border-l border-border/80 pl-4 ml-1">
+            {experiences.map((exp, idx) => (
+              <div key={idx} className="relative flex flex-col gap-1.5">
+                {/* Node point marker */}
+                <span className="absolute -left-[21px] top-1.5 h-2 w-2 rounded-full bg-coral border border-background"></span>
+
+                <div className="flex flex-col gap-0.5 font-sans">
+                  <h4 className="text-base font-bold text-ink leading-tight">
+                    {exp.role}
+                  </h4>
+                  <div className="text-xs font-semibold text-muted/95">
+                    {exp.company} <span className="text-border">|</span> {exp.location}
+                  </div>
+                  <div className="text-[10px] font-mono font-bold text-coral uppercase mt-1">
+                    {exp.period}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        {/* Big Education Card */}
+        <Card className="apple-glass border border-white/[0.08] hover:border-coral hover:scale-[1.02] hover:-translate-y-0.5 transition-all duration-300 p-6 rounded-xl flex flex-col gap-6 h-full">
+          <h3 className="text-lg font-bold font-sans uppercase tracking-wider text-ink flex items-center gap-2">
+            <GraduationCapIcon className="h-5 w-5 text-coral" />
+            <span>Education</span>
+          </h3>
+
+          <div className="flex flex-col gap-6 border-l border-border/80 pl-4 ml-1">
+            <div className="relative flex flex-col gap-1.5">
+              {/* Node point marker */}
+              <span className="absolute -left-[21px] top-1.5 h-2 w-2 rounded-full bg-coral border border-background"></span>
+
+              <div className="flex flex-col gap-0.5 font-sans">
+                <h4 className="text-base font-bold text-ink leading-tight">
+                  {education.degree}
+                </h4>
+                <div className="text-xs font-semibold text-muted/95">
+                  {education.institute} <span className="text-border">|</span> {education.location}
+                </div>
+                <div className="text-[10px] font-mono font-bold text-coral uppercase mt-1">
+                  {education.year}
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      {/* Overhauled Tech Stack Card (All Visible, Dynamic Vector Logos on Hover) */}
+      <Card id="tech-stack" className="scroll-mt-24 apple-glass border border-white/[0.08] hover:border-coral hover:scale-[1.01] hover:-translate-y-0.5 transition-all duration-300 p-6 rounded-xl flex flex-col gap-6 font-sans">
+        <h3 className="text-lg font-bold uppercase tracking-wider text-ink font-mono">
+          [ Technical Stack ]
+        </h3>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {skillsCategories.map((cat) => (
+            <div key={cat.id} className="flex flex-col gap-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-sage border-b border-border/40 pb-1.5 font-mono">
+                {`[ ${cat.name} ]`}
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {cat.skills.map((skill, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center gap-2 rounded-xl border border-border/70 bg-background/50 px-3 py-2 text-xs font-semibold text-muted/90 transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 hover:border-coral hover:text-coral hover:bg-surface hover:shadow-[0_0_12px_rgba(255,46,85,0.15)] select-none cursor-default group"
+                  >
+                    <span className="text-muted/65 group-hover:text-coral transition-colors duration-300">
+                      {getTechIcon(skill.name)}
                     </span>
-                  ))}
-                </p>
-              </motion.li>
-            ))}
-          </motion.ul>
-
-          {/* Tools */}
-          <motion.h4
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ delay: 1.1, duration: 0.5 }}
-            className="mt-8 mb-3 text-sm text-gray-700 font-ovo text-center lg:text-left dark:text-white/80"
-          >
-            Tools I use
-          </motion.h4>
-
-          <motion.ul
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 1.4, duration: 0.6 }}
-            className="flex flex-wrap justify-center lg:justify-start gap-3"
-          >
-            {toolsData.map((tool, index) => (
-              <motion.li
-                whileHover={{ scale: 1.1 }}
-                key={index}
-                className="flex items-center justify-center w-11 sm:w-12 aspect-square border border-gray-400 rounded-md cursor-pointer hover:-translate-y-1 duration-300"
-              >
-                <Image src={tool} alt="Tool" className="w-4 sm:w-5" />
-              </motion.li>
-            ))}
-          </motion.ul>
-        </motion.div>
-      </motion.div>
-    </motion.div>
+                    <span>{skill.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </section>
   );
 };
 

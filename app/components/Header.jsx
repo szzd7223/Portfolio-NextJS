@@ -1,146 +1,106 @@
-import { assets } from "@/assets/assets";
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 import { motion } from "motion/react";
+import { portfolioData } from "@/data/portfolio";
+import { Button } from "@/components/ui/button";
+import { GitHubIcon, LinkedInIcon, XIcon, MailIcon, DownloadIcon } from "@/components/icons";
 
 const Header = () => {
+  const { name, title, tagline, bio, avatar, socials, resumeLink } = portfolioData.personalInfo;
+
   return (
-    <div className="w-11/12 max-w-3xl text-center mx-auto min-h-screen pt-30 flex flex-col items-center justify-center gap-4">
+    <section className="flex flex-col items-center pt-8 text-center sm:pt-14">
+      {/* Profile Image with clean border and shadow */}
       <motion.div
-        initial={{ scale: 0 }}
-        whileInView={{ scale: 1 }}
-        transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="relative h-[136px] w-[136px]"
       >
-        <Image src={assets.profile_img} alt="" className="rounded-full w-32" />
+        <Image
+          src={avatar}
+          alt={name}
+          priority
+          width={136}
+          height={136}
+          className="h-full w-full rounded-full border-2 border-border object-cover shadow-[0_8px_24px_rgba(26,26,26,0.06)] dark:shadow-[0_8px_24px_rgba(0,0,0,0.4)]"
+        />
       </motion.div>
 
-      <motion.h3
-        initial={{ y: -20, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        className="flex items-end gap-2 text-xl md:text-2xl mb-3 font-ovo"
-      >
-        Hi! I'm Saad <Image src={assets.hand_icon} alt="" className="w-6" />
-      </motion.h3>
-
+      {/* Name in Serif */}
       <motion.h1
-        initial={{ y: -30, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
-        className="text-3xl sm:text-6xl lg:text-[66px] font-ovo"
+        initial={{ y: 15, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+        className="mt-7 font-serif text-5xl font-semibold leading-none tracking-tight text-ink sm:text-7xl"
       >
-        Software Developer
+        {name}
       </motion.h1>
 
+      {/* Tagline / Subtitle */}
       <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.7 }}
-        className="max-w-2xl mx-auto font-ovo"
+        initial={{ y: 15, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="mt-5 max-w-none font-sans text-lg font-medium leading-relaxed text-muted sm:text-2xl"
       >
-        I am a software developer who enjoys building web applications and
-        working on interesting projects. Always curious and learning, I like
-        turning ideas into functional, clean code.
+        {title}
       </motion.p>
 
-      <div className="flex flex-col sm:flex-row items-center gap-4 mt-4 font-outfit">
-        <motion.a
-          initial={{ y: 30, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1 }}
-          href="#contact"
-          className="px-10 py-3 border border-white rounded-full bg-black text-white flex items-center gap-2 dark:bg-transparent"
-        >
-          Contact me
-          <Image src={assets.right_arrow_white} alt="" className="w-4" />
-        </motion.a>
-
-        <motion.a
-          initial={{ y: 30, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1 }}
-          href="/saad-resume.pdf"
-          download
-          className="px-10 py-3 border rounded-full border-gray-500 flex items-center gap-2 bg-white dark:text-black"
-        >
-          My Resume
-          <Image src={assets.download_icon} alt="" className="w-4" />
-        </motion.a>
-      </div>
-
-      <motion.div
-        initial={{ y: 30, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, delay: 1.2 }}
-        className="flex items-center gap-10 mt-6"
+      {/* Short Bio */}
+      <motion.p
+        initial={{ y: 15, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        className="mt-4 max-w-[580px] font-sans text-sm leading-relaxed text-muted sm:text-base whitespace-pre-line"
       >
-        {/* GitHub */}
-        <motion.a
-          initial={{ scale: 0 }}
-          whileInView={{ scale: 1 }}
-          transition={{
-            duration: 0.5,
-            delay: 0.1,
-            type: "spring",
-            stiffness: 120,
-          }}
-          href="https://github.com/szzd7223"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-20 h-20 flex items-center justify-center rounded-full overflow-hidden hover:scale-105 transition-transform duration-200"
-        >
-          <Image
-            src={assets.github_icon}
-            alt="GitHub"
-            className="w-full h-full object-contain"
-          />
-        </motion.a>
+        {bio}
+      </motion.p>
 
-        {/* LinkedIn */}
-        <motion.a
-          initial={{ scale: 0 }}
-          whileInView={{ scale: 1 }}
-          transition={{
-            duration: 0.5,
-            delay: 0.2,
-            type: "spring",
-            stiffness: 120,
-          }}
-          href="https://www.linkedin.com/in/ssaaaaddshaikh/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-20 h-20 flex items-center justify-center rounded-full overflow-hidden hover:scale-105 transition-transform duration-200"
-        >
-          <Image
-            src={assets.linkedin_icon}
-            alt="LinkedIn"
-            className="w-full h-full object-contain"
-          />
-        </motion.a>
+      {/* Social Capsule Grid using custom Button components */}
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        className="mt-9 flex flex-wrap justify-center gap-4 w-full"
+      >
+        <Button variant="outline" asChild className="h-14 min-w-[145px] sm:min-w-[160px] justify-center font-semibold text-lg hover:text-coral transition-all apple-glass rounded-xl border border-white/[0.08] hover:border-coral hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0_12px_rgba(217,78,78,0.2)] shadow-sm px-6">
+          <a href={socials.linkedin} target="_blank" rel="noopener noreferrer">
+            <LinkedInIcon className="h-5 w-5" />
+            <span>LinkedIn</span>
+          </a>
+        </Button>
 
-        {/* Twitter */}
-        <motion.a
-          initial={{ scale: 0 }}
-          whileInView={{ scale: 1 }}
-          transition={{
-            duration: 0.5,
-            delay: 0.3,
-            type: "spring",
-            stiffness: 120,
-          }}
-          href="https://x.com/ssaaaadd_sh"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-20 h-20 flex items-center justify-center rounded-full overflow-hidden hover:scale-105 transition-transform duration-200"
-        >
-          <Image
-            src={assets.twitter_icon}
-            alt="Twitter"
-            className="w-full h-full object-contain"
-          />
-        </motion.a>
+        <Button variant="outline" asChild className="h-14 min-w-[145px] sm:min-w-[160px] justify-center font-semibold text-lg hover:text-coral transition-all apple-glass rounded-xl border border-white/[0.08] hover:border-coral hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0_12px_rgba(217,78,78,0.2)] shadow-sm px-6">
+          <a href={socials.twitter} target="_blank" rel="noopener noreferrer">
+            <XIcon className="h-4 w-4" />
+            <span>Twitter</span>
+          </a>
+        </Button>
+
+        <Button variant="outline" asChild className="h-14 min-w-[145px] sm:min-w-[160px] justify-center font-semibold text-lg hover:text-coral transition-all apple-glass rounded-xl border border-white/[0.08] hover:border-coral hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0_12px_rgba(217,78,78,0.2)] shadow-sm px-6">
+          <a href={socials.github} target="_blank" rel="noopener noreferrer">
+            <GitHubIcon className="h-5 w-5" />
+            <span>GitHub</span>
+          </a>
+        </Button>
       </motion.div>
-    </div>
+
+      {/* Direct Resume Download Link */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6 }}
+        className="mt-8"
+      >
+        <Button variant="ghost" size="sm" asChild>
+          <a href={resumeLink} download className="flex items-center gap-2 text-xs font-semibold text-muted hover:text-coral uppercase tracking-wider">
+            <DownloadIcon className="h-4 w-4" />
+            <span>Download PDF Resume</span>
+          </a>
+        </Button>
+      </motion.div>
+    </section>
   );
 };
 

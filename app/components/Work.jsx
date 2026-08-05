@@ -1,144 +1,87 @@
-import { assets, workData } from "@/assets/assets";
-import Image from "next/image";
 import React from "react";
-import { motion } from "motion/react";
+import { portfolioData } from "@/data/portfolio";
+import { Card } from "@/components/ui/card";
+import { ExternalLinkIcon, GitHubIcon } from "@/components/icons";
 
-const Work = ({ isDarkMode }) => {
+const Work = () => {
+  const { featuredProjects } = portfolioData;
+
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-      id="work"
-      className="w-full px-[12%] py-10 scroll-mt-20 font-outfit"
-    >
-      <motion.h4
-        initial={{ y: -20, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-        className="text-center mb-2 text-lg font-ovo"
-      >
-        My portfolio
-      </motion.h4>
-      <motion.h2
-        initial={{ y: -20, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.5 }}
-        className="text-center text-5xl font-ovo"
-      >
-        My latest work
-      </motion.h2>
+    <section id="work" className="scroll-mt-24 flex flex-col gap-12">
+      {/* Section Header */}
+      <div className="border-b border-border pb-6">
+        <span className="text-xs font-bold uppercase tracking-[0.2em] text-coral font-sans">
+          Projects
+        </span>
+        <h2 className="mt-3 font-serif text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">
+          Featured Projects
+        </h2>
+      </div>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.7, duration: 0.5 }}
-        className="text-center max-w-2xl mx-auto mt-5 mb-12 font-ovo"
-      >
-        Here are some of the projects I’ve built using modern web technologies.
-        Each project reflects my skills in design, development, and
-        problem-solving.
-      </motion.p>
+      {/* Grid of Featured Projects */}
+      <div className="grid gap-6 md:grid-cols-2">
+        {featuredProjects.map((project) => (
+          <Card key={project.id} className="flex flex-col h-full apple-glass border border-white/[0.08] hover:border-coral p-6 rounded-xl hover:-translate-y-1 hover:scale-[1.02] hover:shadow-[0_8px_30px_rgba(217,78,78,0.15)] transition-all duration-300 group">
+            {/* Top Tag line */}
+            <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-sage mb-2.5">
+              {project.tag}
+            </div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.9, duration: 0.6 }}
-        className="
-    grid
-    grid-cols-1
-    sm:grid-cols-2
-    my-10
-    gap-6
-  "
-      >
-        {workData.map((project, index) => (
-          <motion.div
-            key={index}
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-            className="
-        aspect-[16/9]
-        rounded-lg
-        relative
-        cursor-pointer
-        group
-        overflow-hidden
-        bg-center
-        bg-cover
-      "
-            style={{ backgroundImage: `url(${project.bgImage})` }}
-          >
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="
-          absolute
-          inset-x-6
-          bottom-6
-          h-32
-          bg-white
-          rounded-md
-          px-5
-          py-4
-          flex
-          items-start
-          justify-between
-          gap-4
-          transition-all
-          duration-500
-          group-hover:bottom-8
-          no-underline
-        "
-            >
-              <div className="flex flex-col gap-1 overflow-hidden">
-                <h2
-                  className="
-            font-semibold
-            text-black
-            leading-snug
-            line-clamp-2
-          "
-                >
+            {/* Title & Description */}
+            <div className="flex flex-col gap-2 mb-5">
+              <h3 className="font-sans text-lg font-semibold tracking-tight text-ink group-hover:text-coral transition-colors duration-200 min-h-[56px] flex items-center">
+                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                   {project.title}
-                </h2>
+                </a>
+              </h3>
+              <p className="text-sm leading-relaxed text-muted font-sans min-h-[110px]">
+                {project.description}
+              </p>
+            </div>
 
-                <p
-                  className="
-            text-sm
-            text-gray-600
-            leading-snug
-            line-clamp-2
-          "
+            {/* Card Footer: Tech pills and consistent Links */}
+            <div className="flex items-center justify-between border-t border-border/40 mt-auto pt-4 gap-4 font-sans font-medium">
+              <div className="flex flex-wrap gap-1 h-12 overflow-hidden">
+                {project.technologies.map((tech, idx) => (
+                  <span
+                    key={idx}
+                    className="rounded-full px-2.5 py-0.5 text-[10px] font-semibold text-muted bg-border/40 border border-border/10"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              
+              <div className="flex items-center gap-3 text-xs font-mono text-muted select-none">
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-coral transition-colors duration-200 flex items-center gap-1"
                 >
-                  {project.description}
-                </p>
+                  <GitHubIcon className="h-3.5 w-3.5" />
+                  <span>github</span>
+                </a>
+                {project.liveUrl && (
+                  <>
+                    <span className="text-border/60">/</span>
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-coral transition-colors duration-200 flex items-center gap-1"
+                    >
+                      <ExternalLinkIcon className="h-3.5 w-3.5" />
+                      <span>live</span>
+                    </a>
+                  </>
+                )}
               </div>
-
-              <div
-                className="
-          shrink-0
-          border
-          border-black
-          rounded-full
-          w-9
-          aspect-square
-          flex
-          items-center
-          justify-center
-          shadow-[2px_2px_0_#000]
-          transition
-          group-hover:bg-lime-300
-        "
-              >
-                <Image src={assets.send_icon} alt="send icon" className="w-5" />
-              </div>
-            </a>
-          </motion.div>
+            </div>
+          </Card>
         ))}
-      </motion.div>
-    </motion.div>
+      </div>
+    </section>
   );
 };
 

@@ -1,15 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Doto:wght@400;700;900&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+:root {
+  --background: #1C1C1E; /* Softer dark grey background */
+  --surface: #262629;    /* Card surface background */
+  --border: #3A3A3E;     /* Muted border grey */
+  --ink: #F3F4F6;        /* Clear ink text */
+  --muted: #A1A1AA;      /* Desaturated grey text */
+  --coral: #D94E4E;      /* Softer desaturated crimson red */
+  --sage: #A1A1AA;
+}
+
+.dark {
+  --background: #1C1C1E;
+  --surface: #262629;
+  --border: #3A3A3E;
+  --ink: #F3F4F6;
+  --muted: #A1A1AA;
+  --coral: #D94E4E;
+  --sage: #A1A1AA;
+}
+
 @theme {
-  --color-lightHover: #fcf4ff;
-  --color-darkHover: #2a004a;
-  --color-darkTheme: #11001f;
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-coral: var(--coral);
+  --color-sage: var(--sage);
+  
+  --font-serif: "Doto", monospace;
+  --font-sans: "Outfit", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
 
-  --shadow-black: 4px 4px 0 #000;
-  --shadow-white: 4px 4px 0 #fff;
+body {
+  background-color: var(--background);
+  color: var(--ink);
+  font-family: var(--font-sans), sans-serif;
+  /* Premium Grid background pattern */
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 44px 44px;
+  position: relative;
+  transition-property: background-color, color, border-color;
+  transition-duration: 200ms;
+}
 
-  --font-outfit: 'Outfit', sans-serif;
-  --font-ovo: 'Ovo', serif;
+/* Slowly moving ambient background glow */
+body::before {
+  content: "";
+  position: fixed;
+  top: -30%;
+  left: -30%;
+  width: 160%;
+  height: 160%;
+  background: radial-gradient(circle, rgba(255, 46, 85, 0.02) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: -1;
+  animation: drift 20s ease-in-out infinite alternate;
+}
+
+/* Mouse tracking spotlight effect on grid lines */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  /* Colored active grid pattern matching the base grid */
+  background-image: 
+    linear-gradient(to right, rgba(217, 78, 78, 0.45) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(217, 78, 78, 0.45) 1px, transparent 1px);
+  background-size: 44px 44px;
+  /* Mask it with a sharp, smaller radial gradient centered at the mouse position */
+  -webkit-mask-image: radial-gradient(
+    200px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    200px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    transparent 100%
+  );
+}
+
+@keyframes drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(5%, 5%) scale(1.03);
+  }
+}
+
+/* Custom styled typing cursor effect */
+.typed-prompts span::after {
+  content: "|";
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from, to { color: transparent }
+  50% { color: var(--coral) }
+}
+
+/* Premium Apple-like Liquid Glass effect */
+.apple-glass {
+  background-color: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.15), 
+    0 8px 32px 0 rgba(0, 0, 0, 0.25);
 }
