@@ -49,7 +49,7 @@ const AboutMe = () => {
         variants={cardVariants}
         className="w-full hidden sm:block"
       >
-        <Card className="apple-glass border border-white/[0.08] hover:border-coral transition-all duration-300 p-6 rounded-2xl shadow-lg w-full aspect-[1.7] overflow-hidden">
+        <Card className="apple-glass border border-white/[0.08] hover:border-coral hover:scale-[1.02] hover:-translate-y-0.5 transition-all duration-300 p-6 rounded-2xl shadow-lg w-full aspect-[1.7] overflow-hidden">
           <div className="relative w-full aspect-video rounded-xl bg-black/20 overflow-hidden">
             <iframe
               src="https://drive.google.com/file/d/11TMrd4frXanmorTCRwiGftLWRlap8IQs/preview"
@@ -67,7 +67,7 @@ const AboutMe = () => {
         variants={cardVariants}
         className="w-full sm:hidden"
       >
-        <Card className="apple-glass border border-white/[0.08] hover:border-coral transition-all duration-300 p-6 rounded-2xl shadow-lg w-full text-center">
+        <Card className="apple-glass border border-white/[0.08] hover:border-coral hover:scale-[1.02] hover:-translate-y-0.5 transition-all duration-300 p-6 rounded-2xl shadow-lg w-full text-center">
           <p className="text-muted-foreground">
             Watch my intro video{" "}
             <a
