@@ -9,7 +9,7 @@ const Header = () => {
   const { name, title, tagline, bio, avatar, socials, resumeLink } = portfolioData.personalInfo;
 
   // Typing animation configuration
-  const normalPart = "Software dev, working with Node.js, React.js, Next.js, Python and Java.\nI build whatever I like and it's usually good.\nI can build whatever you want, ";
+  const normalPart = "Software dev, working with Node.js, React.js, Next.js, Python and Java.\nI build whatever I like and it's usually good.\nI can build high quality software that you'd want, ";
   const highlightedPart = "definitely.";
   const fullTextLength = normalPart.length + highlightedPart.length;
 
