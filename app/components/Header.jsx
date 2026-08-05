@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { portfolioData } from "@/data/portfolio";
@@ -7,6 +7,38 @@ import { GitHubIcon, LinkedInIcon, XIcon, MailIcon, DownloadIcon } from "@/compo
 
 const Header = () => {
   const { name, title, tagline, bio, avatar, socials, resumeLink } = portfolioData.personalInfo;
+
+  // Typing animation configuration
+  const normalPart = "Software dev, working with Node.js, React.js, Next.js, Python and Java.\nI build whatever I like and it's usually good.\nI can build whatever you want, ";
+  const highlightedPart = "definitely.";
+  const fullTextLength = normalPart.length + highlightedPart.length;
+
+  const [charCount, setCharCount] = useState(0);
+
+  useEffect(() => {
+    let interval;
+    const startTimeout = setTimeout(() => {
+      interval = setInterval(() => {
+        setCharCount((prev) => {
+          if (prev >= fullTextLength) {
+            clearInterval(interval);
+            return prev;
+          }
+          return prev + 1;
+        });
+      }, 70); // Natural character-by-character typing speed (70ms)
+    }, 200);
+
+    return () => {
+      clearTimeout(startTimeout);
+      if (interval) clearInterval(interval);
+    };
+  }, [fullTextLength]);
+
+  const typedNormal = normalPart.slice(0, charCount);
+  const typedHighlight = charCount > normalPart.length
+    ? highlightedPart.slice(0, charCount - normalPart.length)
+    : "";
 
   return (
     <section className="flex flex-col items-center pt-8 text-center sm:pt-14">
@@ -47,14 +79,22 @@ const Header = () => {
         {title}
       </motion.p>
 
-      {/* Short Bio */}
+      {/* Short Bio with Typewriter Animation */}
       <motion.p
         initial={{ y: 15, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="mt-4 max-w-[580px] font-sans text-sm leading-relaxed text-muted sm:text-base whitespace-pre-line"
+        className="mt-4 max-w-[580px] font-sans text-sm leading-relaxed text-muted sm:text-base whitespace-pre-line min-h-[48px]"
       >
-        {bio}
+        <span>{typedNormal}</span>
+        {typedHighlight && (
+          <span className="text-coral font-bold transition-colors duration-200">
+            {typedHighlight}
+          </span>
+        )}
+        {charCount < fullTextLength && (
+          <span className="inline-block w-[3px] h-[1.1em] align-middle bg-coral ml-1 animate-[pulse_0.8s_infinite]" />
+        )}
       </motion.p>
 
       {/* Social Capsule Grid using custom Button components */}
